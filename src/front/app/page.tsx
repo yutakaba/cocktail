@@ -31,7 +31,7 @@ export default function Home() {
           title="ブランデーベース"
           description="ここは説明です"
           image="https://placehold.co"
-          href="/brandy/flashCard"
+          href="/brandy"
           tips="ここはヒントです"
         />
         <Card
