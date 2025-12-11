@@ -3,7 +3,7 @@ import { styled } from '@linaria/react';
 export default function CordingPage() {
   return (
     <div>
-      <h1>cording</h1>
+      <h1>tequila</h1>
     </div>
   );
 }

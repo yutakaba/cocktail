@@ -4,34 +4,83 @@ import Card from '@/components/Card';
 export default function Home() {
   return (
     <>
-      <Title>文系エンジニア</Title>
+      <Title>カクテルを探す</Title>
       <CardContainer>
         <Card
-          title="Reactチュートリアル"
+          title="ウォッカベース"
           description="ここは説明です"
           image="https://placehold.co"
-          href="/video"
+          href="/vodka"
           tips="ここはヒントです"
         />
         <Card
-          title="自己分析"
+          title="ジンベース"
           description="ここは説明です"
           image="https://placehold.co"
-          href="/job"
+          href="/gin"
           tips="ここはヒントです"
         />
         <Card
-          title="コーディングテスト対策"
+          title="テキーラベース"
           description="ここは説明です"
           image="https://placehold.co"
-          href="/cording"
+          href="/tequila"
           tips="ここはヒントです"
         />
         <Card
-          title="学習する"
+          title="ブランデーベース"
           description="ここは説明です"
           image="https://placehold.co"
-          href="/study/flashCard"
+          href="/brandy/flashCard"
+          tips="ここはヒントです"
+        />
+        <Card
+          title="ラムベース"
+          description="ここは説明です"
+          image="https://placehold.co"
+          href="/rum"
+          tips="ここはヒントです"
+        />
+        <Card
+          title="ウィスキーベース"
+          description="ここは説明です"
+          image="https://placehold.co"
+          href="/whiskey"
+          tips="ここはヒントです"
+        />
+        <Card
+          title="リキュールーベース"
+          description="ここは説明です"
+          image="https://placehold.co"
+          href="/liqueur"
+          tips="ここはヒントです"
+        />
+        <Card
+          title="ワインベース"
+          description="ここは説明です"
+          image="https://placehold.co"
+          href="/wine"
+          tips="ここはヒントです"
+        />
+        <Card
+          title="ビールベース"
+          description="ここは説明です"
+          image="https://placehold.co"
+          href="/beer"
+          tips="ここはヒントです"
+        />
+        <Card
+          title="日本酒ベース"
+          description="ここは説明です"
+          image="https://placehold.co"
+          href="/sake"
+          tips="ここはヒントです"
+        />
+        <Card
+          title="ノンアルコール"
+          description="ここは説明です"
+          image="https://placehold.co"
+          href="/non-alcoholic"
           tips="ここはヒントです"
         />
       </CardContainer>
