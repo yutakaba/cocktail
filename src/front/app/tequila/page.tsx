@@ -1,10 +1,7 @@
-import { styled } from '@linaria/react';
+import React from 'react'
 
-export default function CordingPage() {
+export default function tequilaPage() {
   return (
-    <div>
-      <h1>tequila</h1>
-    </div>
-  );
+    <div>tequila</div>
+  )
 }
-

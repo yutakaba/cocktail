@@ -1,9 +1,7 @@
-import { styled } from '@linaria/react';
+import React from 'react'
 
-export default function VideoPage() {
+export default function vodkaPage() {
   return (
-    <div>
-      <h1>vodka</h1>
-    </div>
-  );
+    <div>vodka</div>
+  )
 }

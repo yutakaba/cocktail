@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const page = () => {
+export default function beerPage() {
   return (
     <div>beer</div>
   )

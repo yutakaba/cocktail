@@ -1,9 +1,7 @@
-import { styled } from '@linaria/react';
+import React from 'react'
 
-export default function JobPage() {
+export default function ginPage() {
   return (
-    <div>
-      <h1>gin</h1>
-    </div>
-  );
+    <div>gin</div>
+  )
 }
