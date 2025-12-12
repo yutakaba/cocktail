@@ -28,10 +28,10 @@
     "@linaria/react": "^6.3.0",
     "framer-motion": "^12.23.24",
     "jsonwebtoken": "^9.0.2",
-    "next": "15.3.3",
+    "next": "^16.0.10",
     "next-with-linaria": "^1.1.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "react-hook-form": "^7.63.0"
   },
   "devDependencies": {
@@ -71,7 +71,7 @@
     "stylelint": "^16.20.0",
     "stylelint-order": "^7.0.0",
     "ts-jest": "^29.3.4",
-    "typescript": "^5",
+    "typescript": "^5.9.3",
     "typescript-eslint": "^8.33.1",
     "vitest": "^3.2.2"
   }
