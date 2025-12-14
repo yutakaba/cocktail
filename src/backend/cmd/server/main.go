@@ -9,19 +9,16 @@ import (
 )
 
 func main() {
-	// 1. ルーターの設定
-	router := routes.SetupRouter()
 
-	// 2. HTTPサーバーの設定
 	srv := &http.Server{
-		Handler:      router,
-		Addr:         ":8080",
-		WriteTimeout: 15 * time.Second,
-		ReadTimeout:  15 * time.Second,
-	}
+        // SetupCORSHandler()がCORS設定済みのルーターを返します
+        Handler:      routes.SetupCORSHandler(),
+        Addr:         ":8080",
+        WriteTimeout: 15 * time.Second,
+        ReadTimeout:  15 * time.Second,
+    }
 
-	fmt.Println("🎉 Go API Server started on http://localhost:8080")
+    fmt.Println("🎉 Go API Server started on http://localhost:8080")
 
-	// 3. サーバーの起動
-	log.Fatal(srv.ListenAndServe())
-}
+    log.Fatal(srv.ListenAndServe())
+}	
