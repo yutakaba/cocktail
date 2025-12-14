@@ -1,18 +1,19 @@
 import CocktailList from '@/components/CocktailList'
 
 async function getCocktails(base: string) {
-  const res = await fetch(`http://localhost:8080/api/v1/cocktails/${base}`, {
-    cache: 'no-store' 
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/cocktails/${base}`,
+    { cache: "no-store" }
+  )
 
   if (!res.ok) {
-    throw new Error('Failed to fetch cocktail data');
+    throw new Error('Failed to fetch cocktail data')
   }
-  return res.json();
+  return res.json()
 }
 
 export default async function GinPage() {
-  const ginCocktails = await getCocktails('gin'); 
+  const ginCocktails = await getCocktails('gin')
 
   return (
     <div>
