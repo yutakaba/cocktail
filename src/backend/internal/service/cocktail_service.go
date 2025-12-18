@@ -1,42 +1,72 @@
 package service
 
 import (
-	"github.com/yutakaba/cocktail-app-backend/internal/models"
+	"encoding/json"
+	"fmt"
+	"io"
+	"net/http"
+	"os"
 	"strings"
+
+	"github.com/yutakaba/cocktail-app-backend/internal/models"
 )
 
-// モックデータ (初期データの定義)
-var mockCocktails = []models.Cocktail{
-	{
-		ID: 1, Name: "Martini", Base: "Gin",
-		Ingredients: []string{"Gin", "Dry Vermouth"},
-		Method:      "Stir", ABV: 35.0,
-	},
-	{
-		ID: 2, Name: "Gimlet", Base: "Gin",
-		Ingredients: []string{"Gin", "Lime Juice", "Sugar"},
-		Method:      "Shake", ABV: 20.0,
-	},
-	{
-		ID: 3, Name: "Cosmopolitan", Base: "Vodka",
-		Ingredients: []string{"Vodka", "Cranberry Juice", "Lime Juice"},
-		Method:      "Shake", ABV: 18.5,
-	},
-	// 他のベースのカクテルも追加できます
+func GetCocktailsByBase(baseName string) ([]models.Cocktail, error) {
+	
+	query := strings.ReplaceAll(baseName, " ", "_")
+
+	apiKey := os.Getenv("COCKTAIL_DB_API_KEY")
+	if apiKey == "" {
+		apiKey = "1"
+	}
+
+	apiURL := fmt.Sprintf("https://www.thecocktaildb.com/api/json/v1/%s/filter.php?i=%s", apiKey, query)
+
+	resp, err := http.Get(apiURL)
+	if err != nil {
+		return nil, fmt.Errorf("failed to fetch from CocktailDB: %w", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("cocktailDB returned status code: %d", resp.StatusCode)
+	}
+
+	// 5. レスポンスボディを読み込み
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read response body: %w", err)
+	}
+
+	// 6. JSONをパース
+	var dbResp models.CocktailDBFilterResponse
+	if err := json.Unmarshal(body, &dbResp); err != nil {
+		if dbResp.Drinks == nil {
+			return []models.Cocktail{}, nil
+		}
+		return nil, fmt.Errorf("failed to unmarshal CocktailDB response: %w", err)
+	}
+
+	return mapFilterDrinksToCocktails(dbResp.Drinks), nil
 }
 
-// GetCocktailsByBase は指定されたベースリカーのカクテル一覧を返します。
-// (現在はモックデータをフィルタリングしている)
-func GetCocktailsByBase(baseName string) []models.Cocktail {
-	var results []models.Cocktail
-	// 比較を容易にするため、全て小文字に変換
-	lowerBaseName := strings.ToLower(baseName)
+func mapFilterDrinksToCocktails(dbDrinks []models.CocktailDBFilterDrink) []models.Cocktail {
+	var cocktails []models.Cocktail
 
-	for _, c := range mockCocktails {
-		// ベース名が一致するものを抽出
-		if strings.ToLower(c.Base) == lowerBaseName {
-			results = append(results, c)
+	for _, dbd := range dbDrinks {
+		id := 0
+		fmt.Sscanf(dbd.IDDrink, "%d", &id)
+
+		cocktail := models.Cocktail{
+			ID:          id,
+			Name:        dbd.StrDrink,
+			Base:        "",
+			Ingredients: []string{"詳細を見るにはIDでルックアップが必要です"},
+			Method:      "",
+			ABV:         0.0,
+			ImageURL:    dbd.StrDrinkThumb, // ★ URLを大文字に修正しました
 		}
+		cocktails = append(cocktails, cocktail)
 	}
-	return results
+	return cocktails
 }
