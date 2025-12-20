@@ -1,10 +1,10 @@
+import type { NextConfig } from 'next';
 import withLinaria from 'next-with-linaria';
 
-/** @type {import('next').NextConfig} */
-const config = {
+const nextConfig: NextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
-  // ★ ここに画像設定を追加
+  // swcMinifyは現在のNext.jsではデフォルトのため削除（警告対策）
+  
   images: {
     remotePatterns: [
       {
@@ -15,7 +15,6 @@ const config = {
       },
     ],
   },
-} as const
+}
 
-//ToDo: anyの使用をなくす
-export default withLinaria(config as any);
+export default withLinaria(nextConfig);

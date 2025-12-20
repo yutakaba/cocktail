@@ -1,68 +1,104 @@
 import React from 'react';
 import Image from 'next/image';
-import { Cocktail } from '@/types/cocktail'; 
+import { styled } from '@linaria/react';
+import { Cocktail } from '@/types/cocktail';
+
 
 const CocktailListItem: React.FC<{ cocktail: Cocktail }> = ({ cocktail }) => {
-  
   const hasDetails = cocktail.ingredients && cocktail.ingredients.length > 0 && cocktail.method;
-  
-  // TheCocktailDBから返される画像URLは http: で始まることがあり、Next.jsの<Image>では設定が必要です。
-  // 一旦、ここではシンプルな <img> タグを使いますが、本番ではnext.config.jsの設定を推奨します。
 
   return (
-    <li className="flex items-center p-4 border-b border-gray-200 hover:bg-gray-50 transition-colors">
-      
+    <ListItem>
       {cocktail.imageUrl && (
-        <div className="flex-shrink-0 w-16 h-16 mr-4 relative">
-          {/* Next.jsのImageコンポーネントを使う場合、next.config.jsにドメイン登録が必要です */}
-          {/* 暫定的に標準の <img> タグを使用し、スタイルを調整します */}
-          <img
+        <ImageWrapper>
+          <Image
             src={cocktail.imageUrl}
             alt={cocktail.name}
-            className="w-full h-full object-cover rounded-full"
-            width={64}
-            height={64}
+            fill            
+            sizes="64px"    
+            className="object-cover rounded-full" 
           />
-        </div>
+        </ImageWrapper>
       )}
       
       <div>
-        <h2 className="text-xl font-semibold text-indigo-700">{cocktail.name}</h2>
-        
-        {/* 2. 情報が不足している場合の表示調整 */}
+        <CocktailName>{cocktail.name}</CocktailName>
         {hasDetails ? (
-            <p className="text-sm text-gray-500">
-                ベース: {cocktail.base} / 製法: {cocktail.method}
-            </p>
+          <DetailText>
+            ベース: {cocktail.base} / 製法: {cocktail.method}
+          </DetailText>
         ) : (
-            <p className="text-sm text-red-500">
-                詳細情報は現在表示できません (APIからの情報不足)
-            </p>
+          <DetailText isError>
+            詳細情報は現在表示できません (APIからの情報不足)
+          </DetailText>
         )}
-        
-        {/* TODO: ここにホバーポップオーバーの実装を追加する */}
       </div>
-    </li>
+    </ListItem>
   );
 };
 
-// ... CocktailListProps および CocktailList コンポーネントは変更なし ...
 interface CocktailListProps {
   cocktails: Cocktail[];
 }
 
 const CocktailList: React.FC<CocktailListProps> = ({ cocktails }) => {
   if (!cocktails || cocktails.length === 0) {
-    return <p className="text-gray-600 p-8">カクテルが見つかりませんでした。</p>;
+    return <p style={{ color: '#4b5563', padding: '2rem' }}>カクテルが見つかりませんでした。</p>;
   }
 
   return (
-    <ul className="max-w-3xl mx-auto bg-white shadow-lg rounded-lg divide-y divide-gray-100 mt-4">
+    <ListContainer>
       {cocktails.map((cocktail) => (
         <CocktailListItem key={cocktail.id} cocktail={cocktail} />
       ))}
-    </ul>
+    </ListContainer>
   );
 };
+
+const ListContainer = styled.ul`
+  max-width: 48rem;      
+  margin: 1rem auto 0;   
+  background-color: white;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;    
+  list-style: none;
+  padding: 0;
+
+  li:not(:last-child) {
+    border-bottom: 1px solid #f3f4f6; 
+  }
+`;
+
+const ListItem = styled.li`
+  display: flex;
+  align-items: center;
+  padding: 1rem;           
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #f9fafb; 
+  }
+`;
+
+const ImageWrapper = styled.div`
+  flex-shrink: 0;
+  width: 4rem;             
+  height: 4rem;            
+  margin-right: 1rem;      
+  position: relative;      
+`;
+
+const CocktailName = styled.h2`
+  font-size: 1.25rem;      
+  font-weight: 600;        
+  color: #4338ca;         
+  margin: 0;
+`;
+
+const DetailText = styled.p<{ isError?: boolean }>`
+  font-size: 0.875rem;    
+  color: ${(props) => (props.isError ? '#ef4444' : '#6b7280')}; 
+  margin: 0.25rem 0 0;
+`;
 
 export default CocktailList;
