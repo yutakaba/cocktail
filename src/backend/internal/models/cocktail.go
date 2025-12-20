@@ -7,4 +7,5 @@ type Cocktail struct {
 	Ingredients []string `json:"ingredients"`
 	Method      string   `json:"method"`
 	ABV         float64  `json:"abv"`
+	ImageURL    string   `json:"imageUrl"`
 }

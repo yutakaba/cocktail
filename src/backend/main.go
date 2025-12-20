@@ -6,9 +6,16 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
+    "log"
 )
 
 func main() {
+	err := godotenv.Load()
+    if err != nil {
+        log.Println(".env file not found, using system environment variables")
+    }
+	
 	r := gin.Default()
 
 	r.Use(cors.New(cors.Config{

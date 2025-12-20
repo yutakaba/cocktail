@@ -24,12 +24,10 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "*"
-      ],
-      "@/front/*": [
-        "./*"
-      ]
+      "@/*": [ "*" ],
+      "@front/*": [ "./*" ],
+      "@components/*": [ "./components/*" ],
+      "@lib/*": [ "./lib/*" ]
     }
   },
   "include": [
