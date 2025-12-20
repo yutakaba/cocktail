@@ -1,50 +1,86 @@
-import CocktailList from '@/components/CocktailList'
-
-async function getCocktails(base: string) {
-  // 環境変数が設定されていない場合のフォールバック（デバッグ用）
-  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8080';
-  
-  const res = await fetch(
-    `${baseUrl}/api/v1/cocktails/${base}`,
-    { cache: "no-store" }
-  );
-
-  if (!res.ok) {
-    // 開発中に原因がわかるよう、ステータスコードを含めると便利です
-    throw new Error(`Failed to fetch cocktail data: ${res.status}`);
-  }
-  return res.json();
-}
+import { styled } from '@linaria/react';
+import CocktailList from '@components/CocktailList'
+import { getCocktails } from '@lib/api'
 
 export default async function GinPage() {
-  // データの取得中にエラーが発生した場合、Next.jsのerror.tsxが呼ばれます
   const ginCocktails = await getCocktails('gin');
 
   return (
-    <main className="min-h-screen bg-gray-50 py-12 px-4">
-      <div className="max-w-4xl mx-auto">
-        {/* 見出しのスタイリング */}
-        <div className="mb-8 border-b border-indigo-200 pb-4">
-          <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+    <MainContainer>
+      <ContentWrapper>
+        <Header>
+          <Title>
             Gin Based Cocktails
-            <span className="block text-lg font-medium text-indigo-600 mt-2">
-              ジンベースのカクテル一覧
-            </span>
-          </h1>
-        </div>
+            <Subtitle>ジンベースのカクテル一覧</Subtitle>
+          </Title>
+        </Header>
 
-        {/* 共通コンポーネントの呼び出し */}
-        <section className="bg-white rounded-2xl shadow-sm p-2">
+        <ListSection>
           <CocktailList cocktails={ginCocktails} />
-        </section>
+        </ListSection>
 
-        {/* 戻るボタンなどのナビゲーション（任意） */}
-        <div className="mt-8 text-center">
-          <a href="/" className="text-indigo-600 hover:text-indigo-500 font-medium">
-            ← トップページへ戻る
-          </a>
-        </div>
-      </div>
-    </main>
+        <FooterLink>
+          <a href="/">← トップページへ戻る</a>
+        </FooterLink>
+      </ContentWrapper>
+    </MainContainer>
   );
 }
+
+const MainContainer = styled.main`
+  min-height: 100vh;
+  background-color: #f9fafb; 
+  padding: 3rem 1rem;       
+`;
+
+const ContentWrapper = styled.div`
+  max-width: 56rem;         
+  margin-left: auto;
+  margin-right: auto;       
+`;
+
+const Header = styled.div`
+  margin-bottom: 2rem;      
+  border-bottom: 1px solid #c7d2fe;
+  padding-bottom: 1rem;    
+`;
+
+const Title = styled.h1`
+  font-size: 1.875rem;     
+  font-weight: 800;        
+  color: #111827;          
+
+  @media (min-width: 640px) {
+    font-size: 2.25rem;     
+  }
+`;
+
+const Subtitle = styled.span`
+  display: block;           
+  font-size: 1.125rem;      
+  font-weight: 500;         
+  color: #4f46e5;          
+  margin-top: 0.5rem;       
+`;
+
+const ListSection = styled.section`
+  background-color: white; 
+  border-radius: 1rem;     
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); 
+  padding: 0.5rem;     
+`;
+
+const FooterLink = styled.div`
+  margin-top: 2rem;    
+  text-align: center;  
+
+  a {
+    color: #4f46e5;   
+    font-weight: 500;  
+    text-decoration: none;
+
+    &:hover {
+      color: #6366f1; 
+    }
+  }
+`;

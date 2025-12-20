@@ -32,13 +32,11 @@ func GetCocktailsByBase(baseName string) ([]models.Cocktail, error) {
 		return nil, fmt.Errorf("cocktailDB returned status code: %d", resp.StatusCode)
 	}
 
-	// 5. レスポンスボディを読み込み
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, fmt.Errorf("failed to read response body: %w", err)
 	}
 
-	// 6. JSONをパース
 	var dbResp models.CocktailDBFilterResponse
 	if err := json.Unmarshal(body, &dbResp); err != nil {
 		if dbResp.Drinks == nil {
@@ -64,7 +62,7 @@ func mapFilterDrinksToCocktails(dbDrinks []models.CocktailDBFilterDrink) []model
 			Ingredients: []string{"詳細を見るにはIDでルックアップが必要です"},
 			Method:      "",
 			ABV:         0.0,
-			ImageURL:    dbd.StrDrinkThumb, // ★ URLを大文字に修正しました
+			ImageURL:    dbd.StrDrinkThumb,
 		}
 		cocktails = append(cocktails, cocktail)
 	}

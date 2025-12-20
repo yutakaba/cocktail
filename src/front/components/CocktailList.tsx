@@ -12,7 +12,6 @@ const CocktailListItem: React.FC<{ cocktail: Cocktail }> = ({ cocktail }) => {
   return (
     <li className="flex items-center p-4 border-b border-gray-200 hover:bg-gray-50 transition-colors">
       
-      {/* 1. ★ 画像表示エリアを追加 */}
       {cocktail.imageUrl && (
         <div className="flex-shrink-0 w-16 h-16 mr-4 relative">
           {/* Next.jsのImageコンポーネントを使う場合、next.config.jsにドメイン登録が必要です */}
