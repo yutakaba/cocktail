@@ -1,87 +1,67 @@
-import { styled } from '@linaria/react';
-import Card from '@/src/components/Card';
-import bgImage from '../assets/backgroundImage.png';
+'use client'
+
+import * as React from 'react'
+import { styled } from '@linaria/react'
+import Card from '@/src/components/Card'
+import SearchInput from '@/src/components/SearchInput'
+import bgImage from '../assets/backgroundImage.png'
 
 export default function Home() {
+  const [query, setQuery] = React.useState('');
+
   return (
     <Main style={{ '--bg-image': `url(${bgImage.src})` }}>
+      <SearchWrapper>
+        <SearchInput 
+          value={query}
+          onChange={setQuery}
+          placeholder="🔍 カクテルを検索"
+        />
+      </SearchWrapper>
       <CardContainer>
         <Card
-          title="ウォッカベース"
-          description="ここは説明です"
-          image="https://placehold.co"
+          title="vodka"
           href="/vodka"
-          tips="ここはヒントです"
         />
         <Card
-          title="ジンベース"
-          description="ここは説明です"
-          image="https://placehold.co"
+          title="gin"
           href="/gin"
-          tips="ここはヒントです"
         />
         <Card
-          title="テキーラベース"
-          description="ここは説明です"
-          image="https://placehold.co"
+          title="tequila"
           href="/tequila"
-          tips="ここはヒントです"
         />
         <Card
-          title="ブランデーベース"
-          description="ここは説明です"
-          image="https://placehold.co"
+          title="brandy"
           href="/brandy"
-          tips="ここはヒントです"
         />
         <Card
-          title="ラムベース"
-          description="ここは説明です"
-          image="https://placehold.co"
+          title="rum"
           href="/rum"
-          tips="ここはヒントです"
         />
         <Card
-          title="ウィスキーベース"
-          description="ここは説明です"
-          image="https://placehold.co"
+          title="whiskey"
           href="/whiskey"
-          tips="ここはヒントです"
         />
         <Card
-          title="リキュールーベース"
-          description="ここは説明です"
-          image="https://placehold.co"
+          title="liqueur"
           href="/liqueur"
-          tips="ここはヒントです"
         />
         <Card
-          title="ワインベース"
-          description="ここは説明です"
-          image="https://placehold.co"
+          title="wine"
           href="/wine"
-          tips="ここはヒントです"
         />
         <Card
-          title="ビールベース"
-          description="ここは説明です"
-          image="https://placehold.co"
+          title="beer"
           href="/beer"
-          tips="ここはヒントです"
         />
         <Card
-          title="日本酒ベース"
-          description="ここは説明です"
-          image="https://placehold.co"
+          title="sake"
           href="/sake"
-          tips="ここはヒントです"
         />
         <Card
-          title="ノンアルコール"
-          description="ここは説明です"
-          image="https://placehold.co"
-          href="/non-alcoholic"
-          tips="ここはヒントです"
+          title="nonAlcoholic"
+          href="/non-alcoholic"          
         />
       </CardContainer>
     </Main>
@@ -94,13 +74,23 @@ const Main = styled.div`
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  padding: 20px;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+`;
+
+const SEARCH_WIDTH = '600px';
+const SearchWrapper = styled.div`
+  width: 100%;
+  margin-bottom: 8px;
 `;
 
 const CardContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 24px;
-  padding: 24px;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 12px;
+  width: 100%;
+  max-width: ${SEARCH_WIDTH}; 
+  padding: 12px 0;
 `;
-
