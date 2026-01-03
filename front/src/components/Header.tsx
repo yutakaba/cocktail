@@ -1,11 +1,12 @@
 'use client';
 
 import { styled } from '@linaria/react';
+import headerImage from '../assets/headerImage.png';
 
 export default function Header() {
   return (
     <StyledHeader>
-      <StyledTitle>a</StyledTitle>
+      <StyledTitle style={{ '--hd-image': `url(${headerImage.src})` }}></StyledTitle>
     </StyledHeader>
   );
 }
@@ -13,11 +14,14 @@ export default function Header() {
 const StyledHeader = styled.header`
   height: 100px;
   padding: 20px;
-  border-bottom: 1px solid #ddd;
   display: flex;
   align-items: center;
 `;
 
 const StyledTitle = styled.h1`
-  color: #ffffff;
+  background-image: var(--hd-image);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
 `;

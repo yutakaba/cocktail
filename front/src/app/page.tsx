@@ -1,10 +1,10 @@
 import { styled } from '@linaria/react';
 import Card from '@/src/components/Card';
+import bgImage from '../assets/backgroundImage.png';
 
 export default function Home() {
   return (
-    <>
-      <Title>カクテルを探す</Title>
+    <Main style={{ '--bg-image': `url(${bgImage.src})` }}>
       <CardContainer>
         <Card
           title="ウォッカベース"
@@ -84,12 +84,17 @@ export default function Home() {
           tips="ここはヒントです"
         />
       </CardContainer>
-    </>
+    </Main>
   );
 }
 
-const Title = styled.h1`
-  margin: 24px;
+const Main = styled.div`
+  min-height: 100vh;
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 20px;
 `;
 
 const CardContainer = styled.div`
@@ -99,7 +104,3 @@ const CardContainer = styled.div`
   padding: 24px;
 `;
 
-const StyledLink = styled.p`
-  text-decoration: none;
-  color: #2196f3;
-`;
