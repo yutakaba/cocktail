@@ -12,7 +12,7 @@ const QUIZ_LIST = [
     icon: '🍸',
     color: 'linear-gradient(135deg, #2B2D6E 0%, #4347a3 100%)',
   },
-]
+];
 
 export default function QuizMenuPage() {
   return (
@@ -63,7 +63,9 @@ const QuizCard = styled.div`
   display: flex;
   align-items: center;
   gap: 24px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   cursor: pointer;
   border: 1px solid rgba(255, 255, 255, 0.1);
 

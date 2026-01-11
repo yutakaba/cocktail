@@ -1,11 +1,11 @@
 'use client';
 
-import { styled } from '@linaria/react'
-import Link from 'next/link'
+import { styled } from '@linaria/react';
+import Link from 'next/link';
 
 type Props = {
-  title: string
-  href: string
+  title: string;
+  href: string;
 };
 
 export default function Card({ title, href }: Props) {
@@ -15,11 +15,11 @@ export default function Card({ title, href }: Props) {
         <StyledTitle>{title}</StyledTitle>
       </StyledCard>
     </Link>
-  )
+  );
 }
 
 const StyledCard = styled.div`
-  background-color: #2B2D6E;
+  background-color: #2b2d6e;
   border-radius: 30px;
   box-shadow: 0 2px 4px rgba(120, 120, 120, 0.1);
   height: 40px;
@@ -30,12 +30,7 @@ const StyledCard = styled.div`
   text-decoration: none;
   color: inherit;
   cursor: pointer;
-  background: linear-gradient(
-    90deg, 
-    #2B2D6E 0%,
-    #4347a3 50%,
-    #2B2D6E 100%
-  );
+  background: linear-gradient(90deg, #2b2d6e 0%, #4347a3 50%, #2b2d6e 100%);
   background-size: 200% 100%;
   border: none;
   transition: background-position 0.6s ease;

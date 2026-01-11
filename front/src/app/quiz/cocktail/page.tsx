@@ -20,19 +20,18 @@ import {
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
-
 type Step = {
-  id: string
-  text: string
-}
+  id: string;
+  text: string;
+};
 
 function SortableItem({ id, text }: Step) {
-  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id })
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
 
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-  }
+  };
 
   return (
     <ItemCard ref={setNodeRef} style={style} {...attributes} {...listeners}>
@@ -76,11 +75,7 @@ export default function CocktailQuizPage() {
         <SectionTitle>1. グラスを選んでください</SectionTitle>
         <GlassGrid>
           {['コリンズグラス', 'カクテルグラス', 'ロックグラス'].map((g) => (
-            <GlassOption 
-              key={g} 
-              active={glass === g} 
-              onClick={() => setGlass(g)}
-            >
+            <GlassOption key={g} active={glass === g} onClick={() => setGlass(g)}>
               {g === 'コリンズグラス' ? '🥛' : g === 'カクテルグラス' ? '🍸' : '🥃'}
               <p>{g}</p>
             </GlassOption>
@@ -90,11 +85,7 @@ export default function CocktailQuizPage() {
 
       <Section>
         <SectionTitle>2. 手順を正しい順番に並び替えてください</SectionTitle>
-        <DndContext 
-          sensors={sensors} 
-          collisionDetection={closestCenter} 
-          onDragEnd={handleDragEnd}
-        >
+        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
           <SortableContext items={steps} strategy={verticalListSortingStrategy}>
             <ListContainer>
               {steps.map((step) => (
@@ -105,9 +96,7 @@ export default function CocktailQuizPage() {
         </DndContext>
       </Section>
 
-      <SubmitButton onClick={() => alert('判定ロジックをここに書きます')}>
-        完成！
-      </SubmitButton>
+      <SubmitButton onClick={() => alert('判定ロジックをここに書きます')}>完成！</SubmitButton>
     </Container>
   );
 }
@@ -145,15 +134,19 @@ const GlassGrid = styled.div`
 `;
 
 const GlassOption = styled.div<{ active: boolean }>`
-  background: ${props => props.active ? 'rgba(255, 179, 71, 0.2)' : 'rgba(255, 255, 255, 0.1)'};
-  border: 2px solid ${props => props.active ? '#ffb347' : 'transparent'};
+  background: ${(props) => (props.active ? 'rgba(255, 179, 71, 0.2)' : 'rgba(255, 255, 255, 0.1)')};
+  border: 2px solid ${(props) => (props.active ? '#ffb347' : 'transparent')};
   padding: 16px;
   border-radius: 12px;
   text-align: center;
   cursor: pointer;
   transition: all 0.2s;
   font-size: 32px;
-  p { font-size: 12px; margin-top: 8px; color: white; }
+  p {
+    font-size: 12px;
+    margin-top: 8px;
+    color: white;
+  }
 `;
 
 const ListContainer = styled.div`
@@ -163,14 +156,16 @@ const ListContainer = styled.div`
 `;
 
 const ItemCard = styled.div`
-  background: #2B2D6E;
+  background: #2b2d6e;
   padding: 16px;
   border-radius: 12px;
   display: flex;
   align-items: center;
   gap: 12px;
   cursor: grab;
-  &:active { cursor: grabbing; }
+  &:active {
+    cursor: grabbing;
+  }
 `;
 
 const DragHandle = styled.span`
