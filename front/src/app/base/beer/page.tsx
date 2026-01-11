@@ -10,8 +10,8 @@ export default async function BeerPage() {
       <ContentWrapper>
         <Header>
           <Title>
-            Gin Based Cocktails
-            <Subtitle>ブランデーベースのカクテル一覧</Subtitle>
+            Beer Based Cocktails
+            <Subtitle>ビールベースのカクテル一覧</Subtitle>
           </Title>
         </Header>
 

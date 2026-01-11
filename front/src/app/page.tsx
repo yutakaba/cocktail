@@ -7,7 +7,7 @@ import SearchInput from '@/src/components/SearchInput'
 import bgImage from '../assets/backgroundImage.png'
 
 export default function Home() {
-  const [query, setQuery] = React.useState('');
+  const [query, setQuery] = React.useState('')
 
   return (
     <Main style={{ '--bg-image': `url(${bgImage.src})` }}>
@@ -21,47 +21,47 @@ export default function Home() {
       <CardContainer>
         <Card
           title="vodka"
-          href="/vodka"
+          href="/base/vodka"
         />
         <Card
           title="gin"
-          href="/gin"
+          href="/base/gin"
         />
         <Card
           title="tequila"
-          href="/tequila"
+          href="/base/tequila"
         />
         <Card
           title="brandy"
-          href="/brandy"
+          href="/base/brandy"
         />
         <Card
           title="rum"
-          href="/rum"
+          href="/base/rum"
         />
         <Card
           title="whiskey"
-          href="/whiskey"
+          href="/base/whiskey"
         />
         <Card
           title="liqueur"
-          href="/liqueur"
+          href="/base/liqueur"
         />
         <Card
           title="wine"
-          href="/wine"
+          href="/base/wine"
         />
         <Card
           title="beer"
-          href="/beer"
+          href="/base/beer"
         />
         <Card
           title="sake"
-          href="/sake"
+          href="/base/sake"
         />
         <Card
           title="nonAlcoholic"
-          href="/non-alcoholic"          
+          href="/base/non-alcoholic"          
         />
       </CardContainer>
     </Main>
