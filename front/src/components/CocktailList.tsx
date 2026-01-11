@@ -27,7 +27,7 @@ const CocktailListItem: React.FC<{ cocktail: Cocktail }> = ({ cocktail }) => {
             ベース: {cocktail.base} / 製法: {cocktail.method}
           </DetailText>
         ) : (
-          <DetailText isError>詳細情報は現在表示できません (APIからの情報不足)</DetailText>
+          <DetailText isError>詳細情報は現在表示できません。</DetailText>
         )}
       </div>
     </ListItem>
